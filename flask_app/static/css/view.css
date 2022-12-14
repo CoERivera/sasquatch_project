@@ -1,0 +1,35 @@
+body {
+    width: 80vw;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+.entry {
+    padding: 20px;
+    background-color: #33393e;
+    color: white;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 15px;
+}
+
+.a{
+    text-decoration:none;
+}
+
+.btn-outline-warning {
+    margin-top: 20px;
+    margin-left: 75vw;
+    color: goldenrod;
+    width: 200px;
+    border: 2px solid goldenrod;
+    position:relative;
+    top:-80px;
+    left:-150px;
+}
+
+.btn-outline-warning:hover {
+    background-color: goldenrod;
+    color:#33393e;
+    border: 2px solid #33393e;
+}

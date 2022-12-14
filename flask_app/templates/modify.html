@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/css/add.css') }}">
+    <title>Sasquatch Websighting</title>
+</head>
+
+<body>
+    <h1><strong>Sasquatch Websighting<br><br>Welcome, {{session['name']}}!</strong></h1><br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="navbar-brand">Edit this Sighting</div>
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav mr-auto">
+            </ul>
+            <span class="navbar-text">
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Log Out</a>
+            </span>
+        </div>
+    </nav>
+    <div class="entry">
+        <div class="left-half">
+            <form action='/update/{{sighting.id}}' method="post" id="sasquatch_form">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Location:</label>
+                    <input name="location" type="text" class="form-control" value="{{ sighting.location }}" id="exampleFormControlInput1"
+                        placeholder="Enter where you found a Sasquatch">
+                    {% with errors = get_flashed_messages(category_filter=["location"]) %}
+                    {% if errors %}
+                    {% for msg in errors %}
+                    <p class="error">{{ msg }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <label for="exampleFormControlInput2">What Happened:</label>
+                    <textarea class="form-control" rows="7" cols="47" name="description"
+                        placeholder="Describe your sighting" form="sasquatch_form">{{ sighting.description }}</textarea>
+                    {% with errors = get_flashed_messages(category_filter=["description"]) %}
+                    {% if errors %}
+                    {% for msg in errors %}
+                    <p class="error">{{ msg }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+        </div>
+        <div class="right-half">
+            <div class="form-group">
+                <label for="exampleFormControlInput3">Date of Sighting:</label>
+                <input name="date" type="date" class="form-control" value="{{sighting.date}}" id="exampleFormControlInput3">
+                {% with errors = get_flashed_messages(category_filter=["date"]) %}
+                {% if errors %}
+                {% for msg in errors %}
+                <p class="error">{{ msg }}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                <label for="exampleFormControlInput4"># of Sasquatches</label>
+                <input type="number" class="form-control" name="sighted" min="1" value="{{sighting.sighted}}">
+                {% with errors = get_flashed_messages(category_filter=["sighted"]) %}
+                {% if errors %}
+                {% for msg in errors %}
+                <p class="error">{{ msg }}</p>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+            <input class="btn btn-outline-primary" type="submit" value="Update Report">
+            </form>
+            {% with errors = get_flashed_messages(category_filter=["sighting"]) %}
+            {% if errors %}
+            {% for msg in errors %}
+            <p class="error">{{ msg }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+
+    </div>
+</body>
+
+</html>
